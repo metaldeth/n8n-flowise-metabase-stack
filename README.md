@@ -163,18 +163,34 @@ nslookup n8n.example.com
 ⚠️ DNS‑записи иногда обновляются не мгновенно — может уйти от 5 минут до 2‑3 часов (редко до суток).
 ---
 
-### 6. Настройте SSL (рекомендуется)
-Замени DOMAIN на свой домен
+### 6. Настройте SSL (LetsEncrypt в Docker)
 
-```bash
-sudo ufw allow 'Nginx Full'
-sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx \
-  -d n8n.DOMAIN \
-  -d flowise.DOMAIN \
-  -d metabase.DOMAIN \
-  -d pg.DOMAIN
+Теперь мы получим и настроим бесплатные SSL‑сертификаты для всех поддоменов.
+
+1. Убедитесь, что все поддомены (`n8n`, `flowise`, `metabase`, `pg`) указывают на IP вашего сервера.
+
+2. Выполните команду один раз для первичного получения сертификатов  
+   (замените `admin@вашдомен.ru` на ваш реальный e‑mail):
+
+   ```bash
+   sudo docker run --rm \
+     -v $(pwd)/nginx/certs:/etc/letsencrypt \
+     -v $(pwd)/nginx/certbot:/var/www/certbot \
+     certbot/certbot certonly --webroot \
+     -w /var/www/certbot \
+     -d n8n.DOMAIN \
+     -d flowise.DOMAIN \
+     -d metabase.DOMAIN \
+     -d pg.DOMAIN \
+     --non-interactive --agree-tos -m admin@вашдомен.ru
 ```
+После успешной выдачи сертификатов перезапустите nginx:
+
+```
+sudo docker compose restart nginx
+```
+С этого момента все ваши сервисы будут доступны по HTTPS.
+Автоматическое продление сертификатов выполняется контейнером certbot каждые 12 часов, поэтому SSL‑сертификаты будут поддерживаться актуальными без вашего участия.
 
 ---
 
