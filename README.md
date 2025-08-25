@@ -117,8 +117,8 @@ ss
 Скопируйте `.env.example` в `.env`:
 
 ```bash
-cp .env.example .env
-nano .env
+sudo cp .env.example .env
+sudo nano .env
 ```
 
 Измените:  
@@ -130,7 +130,7 @@ nano .env
 ### 4. Запустите сервисы
 
 ```bash
-docker compose up -d
+sudo docker compose up -d
 ```
 
 ---
