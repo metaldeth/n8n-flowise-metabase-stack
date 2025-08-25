@@ -106,14 +106,14 @@ Docker Compose version v2.39.1
 
 ```
 cd /opt
-git clone https://github.com/your-org/n8n-flowise-metabase-stack.git
+sudo git clone https://github.com/metaldeth/n8n-flowise-metabase-stack.git
 cd n8n-flowise-metabase-stack
 ```
 
 ---
 
 ### 3. Настройте окружение
-
+ss
 Скопируйте `.env.example` в `.env`:
 
 ```bash
