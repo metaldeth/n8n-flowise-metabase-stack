@@ -92,11 +92,20 @@ docker --version
 docker compose version
 ```
 
+Должен получится такой итог:
+```
+metaldeth@compute-vm-2-2-20-ssd-1753102165319:~$ docker --version
+Docker version 28.3.3, build 980b856
+metaldeth@compute-vm-2-2-20-ssd-1753102165319:~$ docker compose version
+Docker Compose version v2.39.1
+```
+
 ---
 
 ### 2. Скачайте репозиторий
 
-```bash
+```
+cd /opt
 git clone https://github.com/your-org/n8n-flowise-metabase-stack.git
 cd n8n-flowise-metabase-stack
 ```
