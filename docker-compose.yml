@@ -24,6 +24,10 @@ services:
     container_name: n8n
     restart: always
     env_file: .env
+    depends_on:
+      - postgres
+    volumes:
+      - ./data/n8n:/home/node/.n8n
     networks:
       - backend
 
